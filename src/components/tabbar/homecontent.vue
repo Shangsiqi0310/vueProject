@@ -1,18 +1,14 @@
 <template>
 <div>
-    <mt-swipe :auto="4000">
-        <mt-swipe-item v-for="item in turnpic" :key="item.id">
-           <img :src='item.img'>
-        </mt-swipe-item>
-    </mt-swipe>
+    <swiper :turnpic="turnpic" :isfull="true"></swiper>
     <ul class="mui-table-view mui-grid-view mui-grid-9">
 		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><router-link to='/home/news'>
 		                    <img src="../../images/menu1.png">
 		                    <div class="mui-media-body">新闻资讯</div></router-link></li>
-		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><router-link to=''>
+		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><router-link to='/home/piclist'>
 		                    <img src="../../images/menu2.png">
 		                    <div class="mui-media-body">图片分享</div></router-link></li>
-		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><router-link to=''>
+		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><router-link to='/home/shoplist'>
 		                    <img src="../../images/menu3.png">
 		                    <div class="mui-media-body">商品购买</div></router-link></li>
 		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><router-link to=''>
@@ -29,6 +25,7 @@
 </template>
 
 <script >
+import swiper from '../../components/public/swiper.vue'
     export default {
         data(){
             return {
@@ -40,14 +37,17 @@
         },
         methods:{
             getLubotu(){
-                this.$http.get('api/getlunbo').then(function(result){
-                    console.log(reslut);
+                this.$http.get('api/getlunbo').then(result=>{
+                    console.log(result);
                     
                     if(result.body.status==0){
                         this.turnpic=result.body.message
                     }
                 })
             }
+        },
+        components:{
+            swiper:swiper
         }
     }
     //轮播图的整体结构通过mint-ui实现,轮播图中的数据通过ajax请求得到数据,将得到的数据赋值给data中的数值
@@ -55,13 +55,7 @@
 </script>
 
 <style scoped >
-   .mint-swipe{
-       height:200px;
-   }
-   .mint-swipe .mint-swipe-item img{
-       width:100%;
-       height:100%;
-   }
+   
    .mui-grid-view.mui-grid-9 img{
        height:100%;
        width:100%;
