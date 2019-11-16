@@ -107,6 +107,13 @@ export default {
         },
         addcart(){
             this.ballflag=!this.ballflag
+           //当点击加入购物车时触发函数,这里只负责将数据拼接
+           
+            var nowproduct={id:this.id,count:this.count,price:this.promessage.sell_price,selected:true}
+                
+                this.$store.commit('getCart',nowproduct)
+                
+            
         },
         beforeEnter(el){
             el.style.transform='translate(0,0)'
@@ -122,7 +129,7 @@ export default {
             done()
         },
         afterEnter(el){
-            this.ballflag=!this,ballflag
+            this.ballflag=!this.ballflag
         }
     },
     components:{

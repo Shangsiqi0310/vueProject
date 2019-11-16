@@ -3,7 +3,7 @@
         <div class="good-item" v-for="item in allProduct" :key="item.id" @click="toproinfo(item.id)">
             <img :src="item.img_url" alt="">
             <div class="prodetail"> 
-            <h3>{{item.title}}</h3>
+            <h4>{{item.title}}</h4>
             <p>
                 <span>￥{{item.sell_price}}</span>
                 <span>￥{{item.market_price}}</span>
@@ -56,8 +56,8 @@ export default {
         padding-left:10px;
     }
     .good-item{
-        margin:5px;
-        width:48%;
+        margin:2px;
+        width:47%;
         min-height:250px;
         background-color:#fff;
         box-shadow:2px 2px 10px #bbb;
@@ -77,7 +77,7 @@ export default {
     .good-item p :first-child{
         color:red;
         font-weight:700;
-        font-size:18px;
+        font-size:14px;
     }
     .good-item p :last-child{
         text-decoration:line-through;

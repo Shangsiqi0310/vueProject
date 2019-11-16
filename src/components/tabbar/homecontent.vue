@@ -38,8 +38,6 @@ import swiper from '../../components/public/swiper.vue'
         methods:{
             getLubotu(){
                 this.$http.get('api/getlunbo').then(result=>{
-                    console.log(result);
-                    
                     if(result.body.status==0){
                         this.turnpic=result.body.message
                     }

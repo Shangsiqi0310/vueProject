@@ -1,6 +1,9 @@
 <template>
     <div class="header">
-        <mt-header fixed title="哈哈哈哈,我是头部"></mt-header>
+        <mt-header fixed title="哈哈哈哈,我是头部"> <span  slot="left">
+    <mt-button icon="back" @click="back" v-show="flag">返回</mt-button>
+  </span>
+  <mt-button icon="more" slot="right"></mt-button></mt-header>
 		<transition mode="out-in">
         	<router-view ></router-view>
 		</transition>
@@ -14,7 +17,7 @@
 				<span class="mui-tab-label">会员</span>
 			</router-link>
 			<router-link class="mui-tab-item-ccl" to="/cart">
-				<span class="mui-icon mui-icon-extra mui-icon-extra-cart" ><span class="mui-badge" id="butcart">0</span></span>
+				<span class="mui-icon mui-icon-extra mui-icon-extra-cart" ><span class="mui-badge" id="butcart">{{$store.getters.getAllcount}}</span></span>
 				<span class="mui-tab-label">购物车</span>
 			</router-link>
 			<router-link class="mui-tab-item-ccl" to="/search">
@@ -26,7 +29,42 @@
 </template>
 
 <script>
-
+export default {
+	data(){
+		return{
+			flag:false
+		}
+	},
+	methods:{
+		back(){
+			this.$router.go(-1)
+		},
+		isHome(){
+			if(this.$route.path!="/home"){
+				this.flag=true
+			}else{
+				this.flag=false
+			}
+		}
+	},
+	watch:{
+		"$route.path":function(newValue,oldValue){
+			if(newValue=="/home"){
+				console.log(1);
+				
+				this.flag=false
+			}else{
+				this.flag=true
+			}
+		}
+	},
+	created(){
+		this.isHome()
+	}
+}
+//使用watch监听路由的改变,页面刚加载时flag为false不显示组件
+//当路由改变时不是/home就显示组件
+//但是如果从非首页刷新flag默认就是false,所以在created的时候判断一下路由
 </script>
 
 <style scoped>
